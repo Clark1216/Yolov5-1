@@ -29,18 +29,20 @@ YoloV5 implemented by TensorFlow2 , with support for training, evaluation and in
 - detailed code comments
 - full of drawbacks with huge space to improve
 
+## Prerequisite and System Requirements
+| GPU | GPU driver version | CUDA version |Software | OS       |  
+| --       | --        | --       |  -- |--       |
+|Nvidia RTX30 Graphic card | 460.106.00 | 11.2 | Anaconda 3| Ubuntu 20.04 |
+
+
 ## Usage
 ### Clone and install requirements (TBC)
 ```
-$ git clone git@github.com:LongxingTan/Yolov5.git
-$ cd Yolov5/
-$ pip install -r requirements.txt
+$ git clone git@github.com/Clark1216/Yolov5_TF.git
+$ cd Yolov5_TF/
+$ conda env create --file TF2-test.yml
 ```
-<!-- ### Download pretrained weights
-```
-$ cd weights/
-$ bash download_weights.sh
-``` -->
+
 ### Download VOC
 ```
 $ bash data/scripts/get_voc.sh
@@ -55,7 +57,7 @@ $ bash get_coco_dataset.sh
 ``` -->
 ### Train
 ```
-$ python train.py
+$ python train.py --n_epochs=270
 ```
 
 ### Inference

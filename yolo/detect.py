@@ -19,12 +19,13 @@ from tools.vis_data import draw_box
 
 def image_demo(img, model, img_size=640, class_names=None, conf_threshold=0.4, iou_threshold=0.3):
     original_shape = img.shape
-    
+
     img_input = resize_image(img, target_sizes=img_size)
     img_input = img_input[np.newaxis, ...].astype(np.float32)
     img_input = img_input / 255.
 
     pred_bbox = model(img_input)
+    print("XXXXXXX pred_bbox is", pred_bbox)
     pred_bbox = [tf.reshape(x, (tf.shape(x)[0], -1, tf.shape(x)[-1])) for x in pred_bbox]
     pred_bbox = tf.concat(pred_bbox, axis=1)  # batch_size * -1 * (num_class + 5)
 
@@ -32,7 +33,9 @@ def image_demo(img, model, img_size=640, class_names=None, conf_threshold=0.4, i
     bboxes = bboxes[0].numpy()  # batch is 1 for detect
 
     bboxes = resize_back(bboxes, target_sizes=img_size, original_shape=original_shape)  # adjust box to original size
-    if bboxes.any():   
+    if bboxes.any():
+        print("XXXXXXX bboxes are", bboxes)
+        print("2222222 class is", class_names)
         image = draw_box(img, np.array(bboxes), class_names)
         cv2.imwrite('./demo.jpg', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
     else:
@@ -50,7 +53,7 @@ def test_image_demo(img_dir, model_dir, img_size=640, class_name_dir=None, conf_
     if class_name_dir:
         class_names = {idx: name for idx, name in enumerate(open(class_name_dir).read().splitlines())}
     else:
-        class_names = None    
+        class_names = None
 
     model = tf.saved_model.load(model_dir)
     image_demo(img, model, img_size=img_size, class_names=class_names,
@@ -59,8 +62,8 @@ def test_image_demo(img_dir, model_dir, img_size=640, class_name_dir=None, conf_
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--img_dir', type=str, default='../data/voc2012/VOCdevkit/VOC2012/JPEGImages/2008_001210.jpg', help='detect image dir')
-    parser.add_argument('--class_name_dir', type=str, default='../data/voc2012/VOCdevkit/VOC2012/voc2012.names', help='classes name dir')
+    parser.add_argument('--img_dir', type=str, default='../data/voc/train/VOCdevkit/VOC2012/JPEGImages/2008_001210.jpg', help='detect image dir')
+    parser.add_argument('--class_name_dir', type=str, default='../data/sample/voc.names', help='classes name dir')
     parser.add_argument('--model_dir', type=str, default='../weights/yolov5', help='saved pb model dir')
     parser.add_argument('--img_size', type=int, default=640, help='image target size')
     parser.add_argument('--conf_threshold', type=float, default=0.4, help='filter confidence threshold')
