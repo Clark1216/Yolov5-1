@@ -89,22 +89,22 @@ class DataPrepare(object):
 
         with open(self.output_dir + '/' + self.output_prefix + 'train.txt', 'w') as f:
             for objects in tqdm(all_objects[: split1]):
-                self.write_single(f, objects)                
+                self.write_single(f, objects)
         print('Train annotations generated, samples: {}'.format(split1))
 
         with open(self.output_dir + '/' + self.output_prefix + 'valid.txt', 'w') as f:
             for objects in tqdm(all_objects[split1: split2]):
-                self.write_single(f, objects)                
+                self.write_single(f, objects)
         print('Valid annotations generated, samples: {}'.format(split2 - split1))
 
-        if split2 < 1:       
+        if split2 < 1:
             with open(self.output_dir + '/' + self.output_prefix + 'test.txt', 'w') as f:
                 for objects in tqdm(all_objects[split2:]):
-                    self.write_single(f, objects)                
+                    self.write_single(f, objects)
             print('Test annotations generated, samples: {}'.format(len(all_objects) - split2))
 
     def write_single(self, f, objects):
-        gt = [','.join([str(i[n_gt]) for i in objects[1:6]]) for n_gt in range(len(objects[1]))]                
+        gt = [','.join([str(i[n_gt]) for i in objects[1:6]]) for n_gt in range(len(objects[1]))]
         objects_new = str(objects[0]) + ' ' + ' '.join(gt)
         f.writelines(objects_new)
         f.writelines("\n")
@@ -158,21 +158,21 @@ if __name__ == '__main__':
     base_dir = os.path.abspath(os.path.join(os.getcwd(), ".."))
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str, default=base_dir + '/data/voc', help='data directory')
-    parser.add_argument('--class_name_dir', type=str, default=base_dir + '/data/voc/voc.names', help='class name dir')
+    parser.add_argument('--class_name_dir', type=str, default=base_dir + '/data/sample/voc.names', help='class name dir')
     parser.add_argument('--output_dir', type=str, default=base_dir + '/data/voc', help='output text directory')
     opt = parser.parse_args()
 
     data_prepare = VOCPrepare(os.path.join(opt.data_dir, 'train/VOCdevkit/VOC2007'),
                               opt.class_name_dir,
-                              os.path.join(opt.output_dir, 'voc_train.txt'))
+                              os.path.join(opt.output_dir, 'voc_train2007.txt'))
     data_prepare.write()
 
     data_prepare = VOCPrepare(os.path.join(opt.data_dir, 'train/VOCdevkit/VOC2012'),
                               opt.class_name_dir,
-                              os.path.join(opt.output_dir, 'voc_train.txt'))
+                              os.path.join(opt.output_dir, 'voc_train2012.txt'))
     data_prepare.write()
 
     data_prepare = VOCPrepare(os.path.join(opt.data_dir, 'test/VOCdevkit/VOC2007'),
                               opt.class_name_dir,
-                              os.path.join(opt.output_dir, 'voc_test.txt'))
+                              os.path.join(opt.output_dir, 'voc_test2007.txt'))
     data_prepare.write()

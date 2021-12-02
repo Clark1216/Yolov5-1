@@ -10,7 +10,7 @@ YoloV5 implemented by TensorFlow2 , with support for training, evaluation and in
 
 <!--
 | Model | Size | AP<sup>val</sup> | AP<sub>50</sub><sup>val</sup> | AP<sub>75</sub><sup>val</sup> |  cfg | weights |
-| :-- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | 
+| :-- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | YOLOV5s | 672 | 47.7% |52.6% | 61.4% | [cfg](https://github.com/WongKinYiu/PyTorch_YOLOv4/blob/master/cfg/yolov4.cfg) | [weights](https://drive.google.com/file/d/137U-oLekAu-J-fe0E_seTblVxnU3tlNC/view?usp=sharing) |
 | YOLOV5m | 672 | 47.7% |52.6% | 61.4% | [cfg](https://github.com/WongKinYiu/PyTorch_YOLOv4/blob/master/cfg/yolov4.cfg) | [weights](https://drive.google.com/file/d/137U-oLekAu-J-fe0E_seTblVxnU3tlNC/view?usp=sharing) |
 | YOLOV5l | 672 | 47.7% |52.6% | 61.4% | [cfg](https://github.com/WongKinYiu/PyTorch_YOLOv4/blob/master/cfg/yolov4.cfg) | [weights](https://drive.google.com/file/d/137U-oLekAu-J-fe0E_seTblVxnU3tlNC/view?usp=sharing) |
@@ -30,7 +30,7 @@ YoloV5 implemented by TensorFlow2 , with support for training, evaluation and in
 - full of drawbacks with huge space to improve
 
 ## Usage
-### Clone and install requirements
+### Clone and install requirements (TBC)
 ```
 $ git clone git@github.com:LongxingTan/Yolov5.git
 $ cd Yolov5/
@@ -57,7 +57,6 @@ $ bash get_coco_dataset.sh
 ```
 $ python train.py
 ```
-
 
 ### Inference
 ```
